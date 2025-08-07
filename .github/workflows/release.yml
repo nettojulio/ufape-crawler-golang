@@ -1,0 +1,78 @@
+name: Automatic Release
+
+on:
+  push:
+    tags:
+      - '*' # Dispara o workflow em qualquer push de tag (e.g., 1.0.0, 1.0.1)
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions: # Adicione este bloco para conceder permissão de escrita
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24' # Defina a versão do Go que você usa
+
+      - name: Install git-chglog
+        run: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+
+      - name: Build all artifacts
+        run: make build
+
+      - name: Get Changelog for Release Body
+        id: get_changelog
+        run: |
+          git-chglog --output release_notes.md ${{ github.ref_name }}
+          if [ ! -s release_notes.md ]; then
+            echo "No specific changelog found for tag ${{ github.ref_name }}. Using generic message."
+            echo "Release ${{ github.ref_name }}" > release_notes.md
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body_path: release_notes.md
+          files: | # Adicione aqui os arquivos que você deseja incluir na release
+            ./dist/ufape-crawler-golang-linux
+            ./dist/ufape-crawler-golang-linux-static
+            ./dist/ufape-crawler-golang-linux.so
+            ./dist/ufape-crawler-golang-mac-arm64
+            ./dist/ufape-crawler-golang-mac-arm64.dylib
+            ./dist/ufape-crawler-golang-windows.exe
+            ./dist/ufape-crawler-golang-windows.dll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          TAG=${{ github.ref_name }}
+          IMAGE=nettojulio/ufape-crawler-golang
+
+          echo "📦 Tag da release: $TAG"
+
+          docker build \
+            --build-arg VERSION=$TAG \
+            --build-arg NAME=ufape-crawler-golang \
+            -t $IMAGE:$TAG \
+            -t $IMAGE:latest \
+            -f Dockerfile .
+
+      - name: Push Docker Images
+        run: |
+          TAG=${{ github.ref_name }}
+          IMAGE=nettojulio/ufape-crawler-golang
+
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest
