@@ -1,0 +1,31 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    networks:
+      - app-private-network
+
+  postgres-database:
+    container_name: postgres-database
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
+    restart: on-failure
+    networks:
+      - app-private-network
+
+networks:
+  app-private-network:
+    driver: bridge
+    name: app-private-network
