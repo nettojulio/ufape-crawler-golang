@@ -1,0 +1,47 @@
+{
+  "name": "ufape-crawler-golang",
+  "description": "A Golang template",
+  "homepage": "https://github.com/nettojulio/ufape-crawler-golang#readme",
+  "bugs": {
+    "url": "https://github.com/nettojulio/ufape-crawler-golang/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nettojulio/ufape-crawler-golang.git"
+  },
+  "scripts": {
+    "commit": "cz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "commitizen": "^4.3.1",
+    "cz-customizable": "^7.4.0",
+    "npm-check-updates": "^18.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  },
+  "keywords": [],
+  "author": {
+    "name": "Julio Neto",
+    "email": "nettojulio@hotmail.com",
+    "url": "https://github.com/nettojulio"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.4.1 <24.99.0",
+    "npm": ">=11.4.2 <11.99.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "!win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm"
+  ]
+}
