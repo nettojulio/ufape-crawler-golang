@@ -6,11 +6,11 @@ import (
 	"strings"
 
 	"github.com/labstack/echo/v4"
-	crawler2 "github.com/nettojulio/ufape-crawler-golang/crawler"
+	"github.com/nettojulio/ufape-crawler-golang/crawler"
 )
 
 func CrawlerHandler(c echo.Context) error {
-	var payload crawler2.CorrectPayload
+	var payload crawler.CorrectPayload
 	if err := c.Bind(&payload); err != nil {
 		return c.JSON(http.StatusBadRequest, echo.Map{"error": "invalid request body"})
 	}
@@ -28,7 +28,7 @@ func CrawlerHandler(c echo.Context) error {
 
 	applyDefaults(&payload, originalUrlDetails.Host, &modifiedUrlDetails)
 
-	response, err := crawler2.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
+	response, err := crawler.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, echo.Map{
 			"error":    "internal server error",
@@ -49,9 +49,9 @@ func normalizeURL(u *url.URL) {
 	}
 }
 
-func applyDefaults(payload *crawler2.CorrectPayload, host string, u *url.URL) {
+func applyDefaults(payload *crawler.CorrectPayload, host string, u *url.URL) {
 	if payload.Timeout == nil {
-		def := 1
+		def := 60
 		payload.Timeout = &def
 	}
 	if payload.RemoveFragment == nil {
