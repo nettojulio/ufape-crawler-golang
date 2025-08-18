@@ -30,11 +30,12 @@ func CrawlerHandler(c echo.Context) error {
 
 	response, err := crawler.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, echo.Map{
-			"error":    "internal server error",
-			"details":  err.Error(),
-			"response": response,
-		})
+		/*
+			Retorna 200 OK com o erro no titulo da resposta e status code 518.
+			Isso é feito para manter a compatibilidade com o frontend que espera um status 200
+			e trata o erro no corpo da resposta.
+		*/
+		return c.JSON(http.StatusOK, response)
 	}
 
 	return c.JSON(http.StatusOK, response)

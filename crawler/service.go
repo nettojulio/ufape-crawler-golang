@@ -22,7 +22,17 @@ func CrawlerService(payload CorrectPayload, original, modified url.URL) (Respons
 	resp, err := client.Do(req)
 	elapsed := time.Since(start)
 	if err != nil {
-		return ResponseCrawl{}, err
+		return ResponseCrawl{
+			StatusCode:  518,
+			ElapsedTime: fmt.Sprintf("%+v", elapsed),
+			Links:       LinksResponse{Available: []string{}, Unavailable: []string{}},
+			Title:       err.Error(),
+			Details: DetailsResponse{
+				CorrectURL: original.String(),
+				Original:   original,
+				Modified:   modified,
+			},
+		}, err
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
