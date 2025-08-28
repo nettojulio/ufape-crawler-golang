@@ -9,6 +9,8 @@ type CorrectPayload struct {
 	AllowedDomains    *[]string `json:"allowed_domains,omitempty"`
 	CollectSubdomains *bool     `json:"collect_subdomains,omitempty"`
 	LowerCaseURLs     *bool     `json:"lower_case_urls,omitempty"`
+	CanRetry          *bool     `json:"can_retry,omitempty"`
+	MaxAttempts       *int      `json:"max_attempts,omitempty"`
 }
 
 type LinksResponse struct {
@@ -25,7 +27,7 @@ type DetailsResponse struct {
 type ResponseCrawl struct {
 	StatusCode  int             `json:"statusCode"`
 	ContentType string          `json:"contentType"`
-	ElapsedTime string          `json:"elapsedTime"`
+	ElapsedTime int64           `json:"elapsedTime"`
 	Links       LinksResponse   `json:"links"`
 	Title       string          `json:"title"`
 	Details     DetailsResponse `json:"details"`

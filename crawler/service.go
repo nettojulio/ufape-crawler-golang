@@ -1,7 +1,6 @@
 package crawler
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -24,7 +23,7 @@ func CrawlerService(payload CorrectPayload, original, modified url.URL) (Respons
 	if err != nil {
 		return ResponseCrawl{
 			StatusCode:  518,
-			ElapsedTime: fmt.Sprintf("%+v", elapsed),
+			ElapsedTime: elapsed.Nanoseconds(),
 			Links:       LinksResponse{Available: []string{}, Unavailable: []string{}},
 			Title:       err.Error(),
 			Details: DetailsResponse{
@@ -54,7 +53,7 @@ func CrawlerService(payload CorrectPayload, original, modified url.URL) (Respons
 	return ResponseCrawl{
 		StatusCode:  resp.StatusCode,
 		ContentType: contentType,
-		ElapsedTime: fmt.Sprintf("%+v", elapsed),
+		ElapsedTime: elapsed.Nanoseconds(),
 		Links:       links,
 		Title:       title,
 		Details: DetailsResponse{
@@ -70,7 +69,7 @@ func buildErrorResponse(status int, contentType string, elapsed time.Duration,
 	return ResponseCrawl{
 		StatusCode:  status,
 		ContentType: contentType,
-		ElapsedTime: fmt.Sprintf("%+v", elapsed),
+		ElapsedTime: elapsed.Nanoseconds(),
 		Links:       LinksResponse{Available: []string{}, Unavailable: []string{}},
 		Title:       "",
 		Details: DetailsResponse{

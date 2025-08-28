@@ -23,8 +23,8 @@ func NewRequest(url string) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64)")
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("Connection", "keep-alive")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0")
 	return req, nil
 }

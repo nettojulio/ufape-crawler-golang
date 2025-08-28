@@ -28,14 +28,15 @@ func CrawlerHandler(c echo.Context) error {
 
 	applyDefaults(&payload, originalUrlDetails.Host, &modifiedUrlDetails)
 
-	response, err := crawler.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
-	if err != nil {
-		/*
-			Retorna 200 OK com o erro no titulo da resposta e status code 518.
-			Isso é feito para manter a compatibilidade com o frontend que espera um status 200
-			e trata o erro no corpo da resposta.
-		*/
-		return c.JSON(http.StatusOK, response)
+	attempt := 1
+	var response crawler.ResponseCrawl
+	for attempt <= *payload.MaxAttempts {
+		response, err = crawler.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
+		if response.StatusCode != 404 && response.StatusCode != 200 {
+			attempt++
+			continue
+		}
+		break
 	}
 
 	return c.JSON(http.StatusOK, response)
@@ -70,6 +71,19 @@ func applyDefaults(payload *crawler.CorrectPayload, host string, u *url.URL) {
 	if payload.LowerCaseURLs == nil {
 		def := false
 		payload.LowerCaseURLs = &def
+	}
+	if payload.CanRetry == nil {
+		def := false
+		payload.CanRetry = &def
+	}
+	if payload.MaxAttempts == nil {
+		def := func() int {
+			if *payload.CanRetry {
+				return 10
+			}
+			return 1
+		}()
+		payload.MaxAttempts = &def
 	}
 
 	for i, domain := range *payload.AllowedDomains {
