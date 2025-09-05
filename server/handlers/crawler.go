@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/nettojulio/ufape-crawler-golang/crawler"
@@ -34,6 +35,7 @@ func CrawlerHandler(c echo.Context) error {
 		response, err = crawler.CrawlerService(payload, *originalUrlDetails, modifiedUrlDetails)
 		if response.StatusCode != 404 && response.StatusCode != 200 {
 			attempt++
+			time.Sleep(1 * time.Second)
 			continue
 		}
 		break

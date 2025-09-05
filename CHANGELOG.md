@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+<a name="0.0.5"></a>
+
+## [0.0.5] - 2025-09-05
+
+### Refactor
+
+- **crawler:** add delay between retry attempts in crawler service
+
 <a name="0.0.4"></a>
 
-## [0.0.4] - 2025-08-28
+## [0.0.4] - 2025-08-29
 
 ### Refactor
 
@@ -30,8 +38,9 @@
 
 ## [0.0.1] - 2025-08-17
 
-[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.4...HEAD
+[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.5...HEAD
 
+[0.0.5]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.4...0.0.5
 [0.0.4]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.1...0.0.2
