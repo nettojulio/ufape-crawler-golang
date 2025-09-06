@@ -9,8 +9,9 @@ import (
 )
 
 type Config struct {
-	Version string
-	Port    int
+	Version string `env:"APP_VERSION" envDefault:"development"`
+	Port    int    `env:"APP_PORT" envDefault:"8080"`
+	Host    string `env:"APP_HOST" envDefault:"localhost:8080"`
 }
 
 func Load(version string) (*Config, error) {
@@ -25,8 +26,14 @@ func Load(version string) (*Config, error) {
 		}
 	}
 
+	host := "localhost:8080"
+	if val, ok := os.LookupEnv("APP_HOST"); ok {
+		host = val
+	}
+
 	return &Config{
 		Version: version,
 		Port:    port,
+		Host:    host,
 	}, nil
 }

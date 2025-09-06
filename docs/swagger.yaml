@@ -1,0 +1,184 @@
+basePath: /
+definitions:
+  crawler.APIHealth:
+    properties:
+      status:
+        example: OK
+        type: string
+      version:
+        example: 1.0.0
+        type: string
+    type: object
+  crawler.CorrectPayload:
+    properties:
+      allowed_domains:
+        example:
+        - ufape.edu.br
+        items:
+          type: string
+        type: array
+      can_retry:
+        example: false
+        type: boolean
+      collect_subdomains:
+        example: true
+        type: boolean
+      lower_case_urls:
+        example: false
+        type: boolean
+      max_attempts:
+        example: 1
+        type: integer
+      remove_fragment:
+        example: false
+        type: boolean
+      timeout:
+        example: 60
+        type: integer
+      url:
+        example: http://ufape.edu.br
+        type: string
+    required:
+    - url
+    type: object
+  crawler.DetailsResponseDTO:
+    properties:
+      correctUrl:
+        example: http://ufape.edu.br
+        type: string
+      modified:
+        $ref: '#/definitions/crawler.URLDetails'
+      original:
+        $ref: '#/definitions/crawler.URLDetails'
+    type: object
+  crawler.LinksResponse:
+    properties:
+      available:
+        example:
+        - http://ufape.edu.br/link-valido
+        items:
+          type: string
+        type: array
+      unavailable:
+        example:
+        - http://ufape.edu.br/link-quebrado
+        items:
+          type: string
+        type: array
+    type: object
+  crawler.ResponseCrawlDTO:
+    properties:
+      contentType:
+        example: text/html; charset=utf-8
+        type: string
+      details:
+        $ref: '#/definitions/crawler.DetailsResponseDTO'
+      elapsedTime:
+        example: 150
+        type: integer
+      links:
+        $ref: '#/definitions/crawler.LinksResponse'
+      statusCode:
+        example: 200
+        type: integer
+      title:
+        example: Universidade Federal do Agreste de Pernambuco
+        type: string
+    type: object
+  crawler.URLDetails:
+    properties:
+      ForceQuery:
+        example: false
+        type: boolean
+      Fragment:
+        example: ""
+        type: string
+      Host:
+        example: ufape.edu.br
+        type: string
+      OmitHost:
+        example: false
+        type: boolean
+      Opaque:
+        example: ""
+        type: string
+      Path:
+        example: /
+        type: string
+      RawFragment:
+        example: ""
+        type: string
+      RawPath:
+        example: ""
+        type: string
+      RawQuery:
+        example: ""
+        type: string
+      Scheme:
+        example: https
+        type: string
+      User:
+        $ref: '#/definitions/crawler.UserURLDetails'
+    type: object
+  crawler.UserURLDetails:
+    properties:
+      password:
+        example: password
+        type: string
+      passwordSet:
+        example: true
+        type: boolean
+      username:
+        example: user
+        type: string
+    type: object
+info:
+  contact:
+    email: nettojulio@hotmail.com
+    name: Júlio Netto
+    url: https://github.com/nettojulio/ufape-crawler-golang
+  description: API para realizar crawling de websites. Recebe uma URL e retorna o
+    conteúdo e os links encontrados.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: UFAPE Crawler API
+  version: 0.0.1
+paths:
+  /:
+    get:
+      description: Retorna o status "OK" e a versão atual da aplicação.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: API está saudável
+          schema:
+            $ref: '#/definitions/crawler.APIHealth'
+      summary: Verifica a saúde da API
+      tags:
+      - Health
+    post:
+      consumes:
+      - application/json
+      description: Recebe uma URL e configurações opcionais para iniciar o crawling
+        de uma página web.
+      parameters:
+      - description: Configurações do Crawler - URL é obrigatório
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/crawler.CorrectPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/crawler.ResponseCrawlDTO'
+      summary: Inicia o processo de crawling
+      tags:
+      - Crawler
+swagger: "2.0"

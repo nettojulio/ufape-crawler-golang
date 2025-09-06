@@ -1,18 +1,17 @@
-# 🚀 Golang Template
+# 🚀 UFAPE Crawler Golang
 
 ![Banner do Projeto](https://cdn.dribbble.com/userupload/42462891/file/original-2f612076f7073b798d9b17f647e8d0f2.gif)
 
-Um projeto Go incrível para resolver problemas XYZ e tornar sua vida mais fácil! Este README fornecerá uma visão geral,
+Um projeto Go para coletar dados de uma URL específica! Este README fornecerá uma visão geral,
 instruções de instalação e uso, e muito mais.
 
 ---
 
 ## 💡 Sobre o Projeto
 
-Este projeto foi desenvolvido com o objetivo
-de [descrever brevemente o propósito principal do projeto, o que ele faz e quais problemas ele resolve]. Ele utiliza as
-melhores práticas de Go e foi projetado para
-ser [mencione qualidades como: escalável, performático, fácil de usar, etc.].
+Este projeto foi desenvolvido visando analisar o site institucional
+da [Universidade Federal do Agreste de Pernambuco](https://ufape.edu.br/), aplicando conhecimento adquirido sobre Grafos
+na Disciplina Algoritmos e Estrutura de Dados II. É a API para coleta de dados oferecendo alta performance, facilitar a extração, definido tarefas e escopos.
 
 ### ✨ Principais Features
 
@@ -26,14 +25,13 @@ ser [mencione qualidades como: escalável, performático, fácil de usar, etc.].
 ## 🛠️ Tecnologias Utilizadas
 
 * [Go Lang](https://golang.org/) - Linguagem de programação
-* [Gorilla Mux](https://github.com/gorilla/mux) - Roteador de requisições HTTP
-* [GORM](https://gorm.io/) - ORM para Go
-* [PostgreSQL](https://www.postgresql.org/) - Banco de Dados
-* [Docker](https://www.docker.com/) - Containerização
+* [Echo](https://echo.labstack.com/) - Framework para requisições HTTP
+* [Swagger](https://swagger.io/) - Gerador de documentação
+* [GoDotEnv](https://github.com/joho/godotenv) - Carregamento de variáveis de ambiente
 
 ---
 
-## 🚀 Como Começar
+## 🛫 Como Começar
 
 Siga estas instruções para colocar o projeto em funcionamento em sua máquina local para fins de desenvolvimento e teste.
 
@@ -41,15 +39,21 @@ Siga estas instruções para colocar o projeto em funcionamento em sua máquina 
 
 Certifique-se de ter o seguinte instalado:
 
-* Go (versão 1.20 ou superior)
-* Docker (opcional, para rodar o banco de dados)
+* Go (versão 1.24 ou superior)
 
 ### Instalação
 
 1. **Clone o repositório:**
+   HTTPS
+
    ```bash
-   git clone [https://github.com/seu-usuario/meu-super-projeto-go.git](https://github.com/seu-usuario/meu-super-projeto-go.git)
-   cd meu-super-projeto-go
+   git clone https://github.com/nettojulio/ufape-crawler-golang.git
+   ```
+
+   SSH
+
+   ```bash
+   git clone git@github.com:nettojulio/ufape-crawler-golang.git
    ```
 
 2. **Instale as dependências:**
@@ -57,34 +61,19 @@ Certifique-se de ter o seguinte instalado:
    go mod tidy
    ```
 
-3. **Configuração do Banco de Dados (com Docker):**
-   ```bash
-   docker-compose up -d postgres
-   ```
-   Ou configure seu banco de dados PostgreSQL manualmente.
-
-4. **Configure as variáveis de ambiente:**
-   Crie um arquivo `.env` na raiz do projeto baseado no `config.example.env`:
+3. **Configure as variáveis de ambiente:**
+   Crie um arquivo `.env` na raiz do projeto baseado no `.env.example`:
    ```
    # Exemplo de .env
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_USER=seu_usuario
-   DB_PASSWORD=sua_senha
-   DB_NAME=seu_banco_de_dados
-   API_PORT=8080
+   APP_PORT=8080
    ```
 
-5. **Rode as Migrações do Banco de Dados:**
+4. **Execute o Projeto:**
    ```bash
-   go run main.go migrate
+   go run cmd/main.go
    ```
-
-6. **Execute o Projeto:**
-   ```bash
-   go run main.go
-   ```
-   O projeto estará rodando em `http://localhost:8080` (ou na porta configurada).
+   O projeto estará rodando em `http://localhost:8080` (ou na porta configurada) e espera por requisições HTTP.
+   A documentação do Swagger com rotas e detalhes estará disponível em `http://localhost:8080/swagger/index.html`.
 
 ---
 
@@ -98,7 +87,7 @@ go test ./...
 
 ---
 
-## ⚙️ Configuracoes iniciais
+## ⚙️ Configuracoes iniciais para commits padronizados
 
 1. **Baixe e instale o git-chglog** [Link GitHub](https://github.com/git-chglog/git-chglog)
 2. **Execute o comando**

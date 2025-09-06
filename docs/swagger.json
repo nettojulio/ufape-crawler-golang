@@ -1,0 +1,263 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para realizar crawling de websites. Recebe uma URL e retorna o conteúdo e os links encontrados.",
+        "title": "UFAPE Crawler API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Júlio Netto",
+            "url": "https://github.com/nettojulio/ufape-crawler-golang",
+            "email": "nettojulio@hotmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "0.0.1"
+    },
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Retorna o status \"OK\" e a versão atual da aplicação.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Verifica a saúde da API",
+                "responses": {
+                    "200": {
+                        "description": "API está saudável",
+                        "schema": {
+                            "$ref": "#/definitions/crawler.APIHealth"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Recebe uma URL e configurações opcionais para iniciar o crawling de uma página web.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Crawler"
+                ],
+                "summary": "Inicia o processo de crawling",
+                "parameters": [
+                    {
+                        "description": "Configurações do Crawler - URL é obrigatório",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/crawler.CorrectPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/crawler.ResponseCrawlDTO"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "crawler.APIHealth": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "OK"
+                },
+                "version": {
+                    "type": "string",
+                    "example": "1.0.0"
+                }
+            }
+        },
+        "crawler.CorrectPayload": {
+            "type": "object",
+            "required": [
+                "url"
+            ],
+            "properties": {
+                "allowed_domains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "ufape.edu.br"
+                    ]
+                },
+                "can_retry": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "collect_subdomains": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "lower_case_urls": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "max_attempts": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "remove_fragment": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "timeout": {
+                    "type": "integer",
+                    "example": 60
+                },
+                "url": {
+                    "type": "string",
+                    "example": "http://ufape.edu.br"
+                }
+            }
+        },
+        "crawler.DetailsResponseDTO": {
+            "type": "object",
+            "properties": {
+                "correctUrl": {
+                    "type": "string",
+                    "example": "http://ufape.edu.br"
+                },
+                "modified": {
+                    "$ref": "#/definitions/crawler.URLDetails"
+                },
+                "original": {
+                    "$ref": "#/definitions/crawler.URLDetails"
+                }
+            }
+        },
+        "crawler.LinksResponse": {
+            "type": "object",
+            "properties": {
+                "available": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "http://ufape.edu.br/link-valido"
+                    ]
+                },
+                "unavailable": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "http://ufape.edu.br/link-quebrado"
+                    ]
+                }
+            }
+        },
+        "crawler.ResponseCrawlDTO": {
+            "type": "object",
+            "properties": {
+                "contentType": {
+                    "type": "string",
+                    "example": "text/html; charset=utf-8"
+                },
+                "details": {
+                    "$ref": "#/definitions/crawler.DetailsResponseDTO"
+                },
+                "elapsedTime": {
+                    "type": "integer",
+                    "example": 150
+                },
+                "links": {
+                    "$ref": "#/definitions/crawler.LinksResponse"
+                },
+                "statusCode": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Universidade Federal do Agreste de Pernambuco"
+                }
+            }
+        },
+        "crawler.URLDetails": {
+            "type": "object",
+            "properties": {
+                "ForceQuery": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "Fragment": {
+                    "type": "string",
+                    "example": ""
+                },
+                "Host": {
+                    "type": "string",
+                    "example": "ufape.edu.br"
+                },
+                "OmitHost": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "Opaque": {
+                    "type": "string",
+                    "example": ""
+                },
+                "Path": {
+                    "type": "string",
+                    "example": "/"
+                },
+                "RawFragment": {
+                    "type": "string",
+                    "example": ""
+                },
+                "RawPath": {
+                    "type": "string",
+                    "example": ""
+                },
+                "RawQuery": {
+                    "type": "string",
+                    "example": ""
+                },
+                "Scheme": {
+                    "type": "string",
+                    "example": "https"
+                },
+                "User": {
+                    "$ref": "#/definitions/crawler.UserURLDetails"
+                }
+            }
+        },
+        "crawler.UserURLDetails": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "password"
+                },
+                "passwordSet": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "username": {
+                    "type": "string",
+                    "example": "user"
+                }
+            }
+        }
+    }
+}

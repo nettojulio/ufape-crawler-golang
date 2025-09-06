@@ -1,12 +1,23 @@
 package handlers
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/labstack/echo/v4"
+	"github.com/nettojulio/ufape-crawler-golang/crawler"
+)
 
+// HealthCheckHandler godoc
+// @Summary      Verifica a saúde da API
+// @Description  Retorna o status "OK" e a versão atual da aplicação.
+// @Tags         Health
+// @Produce      json
+// @Success      200  {object} crawler.APIHealth "API está saudável"
+// @Router       / [get]
 func HealthCheckHandler(version string) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		return c.JSON(200, map[string]string{
-			"status":  "OK",
-			"version": version,
-		})
+		ok := crawler.APIHealth{
+			Status:  "OK",
+			Version: version,
+		}
+		return c.JSON(200, ok)
 	}
 }

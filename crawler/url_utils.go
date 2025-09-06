@@ -23,6 +23,11 @@ func NormalizeURL(raw string, payload *CorrectPayload) string {
 	if strings.HasPrefix(u.Host, "www.") {
 		u.Host = strings.TrimPrefix(u.Host, "www.")
 	}
+
+	if strings.HasPrefix(u.Host, "WWW.") {
+		u.Host = strings.TrimPrefix(u.Host, "WWW.")
+	}
+
 	norm := u.String()
 	if *payload.LowerCaseURLs {
 		norm = strings.ToLower(norm)

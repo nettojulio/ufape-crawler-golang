@@ -9,8 +9,7 @@ import (
 	"golang.org/x/net/html"
 )
 
-func CrawlerService(payload CorrectPayload, original, modified url.URL) (ResponseCrawl, error) {
-	client := NewHTTPClient(*payload.Timeout)
+func CrawlerService(client *http.Client, payload CorrectPayload, original, modified url.URL) (ResponseCrawl, error) {
 
 	req, err := NewRequest(modified.String())
 	if err != nil {

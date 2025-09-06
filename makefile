@@ -137,3 +137,13 @@ cover-profile:
 	@go tool cover -html=coverage.out -o coverage.html
 	@echo "Coverage report generated: coverage.html"
 	@go tool cover -html=coverage.out
+
+cover-aggregate:
+	@go test -coverprofile=coverage.out ./...
+	@go tool cover -func=coverage.out
+
+## Swagger Documentation
+
+generate-swagger:
+	@swag init -g cmd/main.go
+	@echo "Swagger documentation generated in docs/swagger"
