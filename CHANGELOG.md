@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+<a name="0.0.7"></a>
+
+## [0.0.7] - 2025-09-07
+
+### Feat
+
+- **ci:** add test coverage step and upload to Codecov
 
 <a name="0.0.6"></a>
 
@@ -52,8 +59,9 @@
 
 ## [0.0.1] - 2025-08-17
 
+[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.7...HEAD
 
-[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.6...HEAD
+[0.0.7]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.6...0.0.7
 [0.0.6]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.5...0.0.6
 [0.0.5]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.4...0.0.5
 [0.0.4]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.3...0.0.4

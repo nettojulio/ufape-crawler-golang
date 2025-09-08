@@ -1,3 +1,10 @@
+[![Build and Test](https://github.com/nettojulio/ufape-crawler-golang/actions/workflows/release.yml/badge.svg)](https://github.com/nettojulio/ufape-crawler-golang/actions/workflows/release.yml)
+[![codecov](https://codecov.io/gh/nettojulio/ufape-crawler-golang/graph/badge.svg)](https://codecov.io/gh/nettojulio/ufape-crawler-golang)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nettojulio/ufape-crawler-golang)](https://goreportcard.com/report/github.com/nettojulio/ufape-crawler-golang)
+![GitHub release(including pre-releases)](https://img.shields.io/github/v/release/nettojulio/ufape-crawler-golang?include_prereleases&cache_bust=1)
+[![GitHub license](https://img.shields.io/github/license/nettojulio/ufape-crawler-golang)](https://github.com/nettojulio/ufape-crawler-golang/blob/main/LICENSE.md)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/nettojulio/ufape-crawler-golang)](https://go.dev/)
+
 # 🚀 UFAPE Crawler Golang
 
 ![Banner do Projeto](https://cdn.dribbble.com/userupload/42462891/file/original-2f612076f7073b798d9b17f647e8d0f2.gif)
@@ -44,6 +51,7 @@ Certifique-se de ter o seguinte instalado:
 ### Instalação
 
 1. **Clone o repositório:**
+
    HTTPS
 
    ```bash
@@ -66,6 +74,7 @@ Certifique-se de ter o seguinte instalado:
    ```
    # Exemplo de .env
    APP_PORT=8080
+   APP_HOST=localhost:8080
    ```
 
 4. **Execute o Projeto:**
