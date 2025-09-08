@@ -13,6 +13,11 @@ Um projeto Go para coletar dados de uma URL específica! Este README fornecerá 
 instruções de instalação e uso, e muito mais.
 
 ---
+Ordinary man doing extraordinary things
+![Ozzy Beloved](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzQ4YTRtbnR5MHozZ3hhZG1raDBseHowa3Q0enhta3J5MXBqOXZkeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PiiWqjknSWbeQ6nLTG/giphy.gif)
+[Ozzy Tribute](https://www.youtube.com/watch?v=dBF78tA443A)
+
+---
 
 ## 💡 Sobre o Projeto
 
