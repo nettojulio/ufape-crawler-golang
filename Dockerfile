@@ -1,5 +1,5 @@
 # Stage 1: Build da aplicação
-FROM golang:1.24.4 AS builder
+FROM golang:1.25.1 AS builder
 
 ARG NAME=ufape-crawler-golang
 

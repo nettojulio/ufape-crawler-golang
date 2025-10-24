@@ -18,7 +18,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.24' # Defina a versão do Go que você usa
+          go-version: '1.25' # Defina a versão do Go que você usa
 
       - name: Run tests and generate coverage
         run: go test -v ./... -coverprofile=coverage.txt

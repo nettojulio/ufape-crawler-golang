@@ -45,31 +45,31 @@ build-snapshot-time:
 	@$(MAKE) build NAME=$(NAME)-snapshot-$(shell date +"%Y-%m-%d_%H-%M-%S")
 
 build-linux:
-	@GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-linux cmd/main.go
+	@GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-linux cmd/api/main.go
 
 build-linux-static:
-	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -a -installsuffix cgo -o ./dist/$(NAME)-linux-static cmd/main.go
+	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -a -installsuffix cgo -o ./dist/$(NAME)-linux-static cmd/api/main.go
 
 build-windows:
-	@GOOS=windows GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-windows.exe cmd/main.go
+	@GOOS=windows GOARCH=amd64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-windows.exe cmd/api/main.go
 
 build-mac-arm64:
-	@GOOS=darwin GOARCH=arm64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-mac-arm64 cmd/main.go
+	@GOOS=darwin GOARCH=arm64 go build -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-mac-arm64 cmd/api/main.go
 
 build-lib-mac:
-	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-mac-arm64.dylib cmd/main.go
+	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-mac-arm64.dylib cmd/api/main.go
 
 build-lib-linux:
-	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-linux.so cmd/main.go
+	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-linux.so cmd/api/main.go
 
 build-lib-windows:
-	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-windows.dll cmd/main.go
+	@go build -buildmode=c-shared -ldflags="-X 'main.Version=$(VERSION)'" -o ./dist/$(NAME)-windows.dll cmd/api/main.go
 
 ## Development and Testing
 # Use this makefile to run the application, manage Docker containers, and handle application.
 
 run:
-	@go run cmd/main.go
+	@go run cmd/api/main.go
 
 docker-up:
 	@docker-compose -f ./docker-compose.yaml up -d --build
@@ -145,5 +145,5 @@ cover-aggregate:
 ## Swagger Documentation
 
 generate-swagger:
-	@swag init -g cmd/main.go
+	@swag init -g cmd/api/main.go
 	@echo "Swagger documentation generated in docs/swagger"

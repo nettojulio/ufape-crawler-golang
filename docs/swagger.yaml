@@ -9,7 +9,32 @@ definitions:
         example: 1.0.0
         type: string
     type: object
-  crawler.CorrectPayload:
+  crawler.DetailsResponseDTO:
+    properties:
+      correctUrl:
+        example: http://ufape.edu.br
+        type: string
+      modified:
+        $ref: '#/definitions/crawler.URLDetails'
+      original:
+        $ref: '#/definitions/crawler.URLDetails'
+    type: object
+  crawler.LinksResponse:
+    properties:
+      available:
+        example:
+        - http://ufape.edu.br/link-valido
+        items:
+          type: string
+        type: array
+      unavailable:
+        example:
+        - http://ufape.edu.br/link-quebrado
+        items:
+          type: string
+        type: array
+    type: object
+  crawler.Payload:
     properties:
       allowed_domains:
         example:
@@ -41,32 +66,7 @@ definitions:
     required:
     - url
     type: object
-  crawler.DetailsResponseDTO:
-    properties:
-      correctUrl:
-        example: http://ufape.edu.br
-        type: string
-      modified:
-        $ref: '#/definitions/crawler.URLDetails'
-      original:
-        $ref: '#/definitions/crawler.URLDetails'
-    type: object
-  crawler.LinksResponse:
-    properties:
-      available:
-        example:
-        - http://ufape.edu.br/link-valido
-        items:
-          type: string
-        type: array
-      unavailable:
-        example:
-        - http://ufape.edu.br/link-quebrado
-        items:
-          type: string
-        type: array
-    type: object
-  crawler.ResponseCrawlDTO:
+  crawler.ResponseDTO:
     properties:
       contentType:
         example: text/html; charset=utf-8
@@ -170,14 +170,14 @@ paths:
         name: payload
         required: true
         schema:
-          $ref: '#/definitions/crawler.CorrectPayload'
+          $ref: '#/definitions/crawler.Payload'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/crawler.ResponseCrawlDTO'
+            $ref: '#/definitions/crawler.ResponseDTO'
       summary: Inicia o processo de crawling
       tags:
       - Crawler

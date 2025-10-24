@@ -17,4 +17,4 @@ echo "📦 Compilando Go..."
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 go build -ldflags="-s -w -X 'main.Version=$VERSION'" \
 -a -installsuffix cgo \
--o $OUTPUT_BIN cmd/main.go
+-o $OUTPUT_BIN cmd/api/main.go

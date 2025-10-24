@@ -62,7 +62,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/crawler.CorrectPayload"
+                            "$ref": "#/definitions/crawler.Payload"
                         }
                     }
                 ],
@@ -70,7 +70,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/crawler.ResponseCrawlDTO"
+                            "$ref": "#/definitions/crawler.ResponseDTO"
                         }
                     }
                 }
@@ -91,7 +91,45 @@ const docTemplate = `{
                 }
             }
         },
-        "crawler.CorrectPayload": {
+        "crawler.DetailsResponseDTO": {
+            "type": "object",
+            "properties": {
+                "correctUrl": {
+                    "type": "string",
+                    "example": "http://ufape.edu.br"
+                },
+                "modified": {
+                    "$ref": "#/definitions/crawler.URLDetails"
+                },
+                "original": {
+                    "$ref": "#/definitions/crawler.URLDetails"
+                }
+            }
+        },
+        "crawler.LinksResponse": {
+            "type": "object",
+            "properties": {
+                "available": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "http://ufape.edu.br/link-valido"
+                    ]
+                },
+                "unavailable": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "http://ufape.edu.br/link-quebrado"
+                    ]
+                }
+            }
+        },
+        "crawler.Payload": {
             "type": "object",
             "required": [
                 "url"
@@ -136,45 +174,7 @@ const docTemplate = `{
                 }
             }
         },
-        "crawler.DetailsResponseDTO": {
-            "type": "object",
-            "properties": {
-                "correctUrl": {
-                    "type": "string",
-                    "example": "http://ufape.edu.br"
-                },
-                "modified": {
-                    "$ref": "#/definitions/crawler.URLDetails"
-                },
-                "original": {
-                    "$ref": "#/definitions/crawler.URLDetails"
-                }
-            }
-        },
-        "crawler.LinksResponse": {
-            "type": "object",
-            "properties": {
-                "available": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "http://ufape.edu.br/link-valido"
-                    ]
-                },
-                "unavailable": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "http://ufape.edu.br/link-quebrado"
-                    ]
-                }
-            }
-        },
-        "crawler.ResponseCrawlDTO": {
+        "crawler.ResponseDTO": {
             "type": "object",
             "properties": {
                 "contentType": {

@@ -2,14 +2,33 @@
 
 ## [Unreleased]
 
+
+<a name="0.0.8"></a>
+
+## [0.0.8] - 2025-10-23
+
+### Feat
+
+- implement crawler service and HTTP handler
+  
+  ### Pull Requests
+
+- Merge pull request [#3](https://github.com/nettojulio/ufape-crawler-golang/issues/3) from nettojulio/nettojulio-patch-1
+  
+  
 <a name="0.0.7"></a>
 
-## [0.0.7] - 2025-09-07
+## [0.0.7] - 2025-09-08
 
 ### Feat
 
 - **ci:** add test coverage step and upload to Codecov
+  
+  ### Pull Requests
 
+- Merge pull request [#3](https://github.com/nettojulio/ufape-crawler-golang/issues/3) from nettojulio/nettojulio-patch-1
+  
+  
 <a name="0.0.6"></a>
 
 ## [0.0.6] - 2025-09-06
@@ -59,8 +78,8 @@
 
 ## [0.0.1] - 2025-08-17
 
-[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.7...HEAD
-
+[Unreleased]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.8...HEAD
+[0.0.8]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.7...0.0.8
 [0.0.7]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.6...0.0.7
 [0.0.6]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.5...0.0.6
 [0.0.5]: https://github.com/nettojulio/ufape-crawler-golang/compare/0.0.4...0.0.5

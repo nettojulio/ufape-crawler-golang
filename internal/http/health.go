@@ -1,8 +1,8 @@
-package handlers
+package http
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/nettojulio/ufape-crawler-golang/crawler"
+	"github.com/nettojulio/ufape-crawler-golang/internal/crawler"
 )
 
 // HealthCheckHandler godoc
@@ -14,10 +14,9 @@ import (
 // @Router       / [get]
 func HealthCheckHandler(version string) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		ok := crawler.APIHealth{
+		return c.JSON(200, crawler.APIHealth{
 			Status:  "OK",
 			Version: version,
-		}
-		return c.JSON(200, ok)
+		})
 	}
 }

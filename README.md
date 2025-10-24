@@ -46,7 +46,7 @@ Siga estas instruções para colocar o projeto em funcionamento em sua máquina 
 
 Certifique-se de ter o seguinte instalado:
 
-* Go (versão 1.24 ou superior)
+* Go (versão 1.25 ou superior)
 
 ### Instalação
 
@@ -79,7 +79,7 @@ Certifique-se de ter o seguinte instalado:
 
 4. **Execute o Projeto:**
    ```bash
-   go run cmd/main.go
+   go run cmd/api/main.go
    ```
    O projeto estará rodando em `http://localhost:8080` (ou na porta configurada) e espera por requisições HTTP.
    A documentação do Swagger com rotas e detalhes estará disponível em `http://localhost:8080/swagger/index.html`.
